@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  gitlab:
+    container_name: ${NAME}
+    hostname: ${NAME}
+    image: ${IMAGE}:${VERSION}
+    restart: always
+    #networks:
+    #  - app_net
+    ports:
+      - ${PORT_1}:80
+      - ${PORT_2}:443
+      - ${PORT_3}:22
+    volumes:
+      - ${ROOT_PATH}/config:/etc/gitlab
+      - ${ROOT_PATH}/logs:/var/log/gitlab
+      - ${ROOT_PATH}/data:/var/opt/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${EXT_URL}'
+        gitlab_rails['gitlab_shell_ssh_port'] = ${PORT_3}
+      TZ: '${TZ}'
+
+#networks:
+#  app_net:
+#    external:
+#      name: apps
