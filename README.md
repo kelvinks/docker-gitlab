@@ -1,5 +1,10 @@
-# docker-gitlab
-install gitlab with docker compose
+# Docker Compose 를 이용한 gitlab 설치
 
-# docker 실행후 패스워드 확인
-docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
+# 기본 폴더 생성
+> sh ./make_folder.sh
+
+# Docker 실행
+docker-compose up -d
+
+# gitlab 로그인 패스워드 확인
+> sh ./show_root_pass.sh
